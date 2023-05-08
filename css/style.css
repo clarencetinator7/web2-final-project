@@ -393,7 +393,16 @@ header .container {
 }
 
 #modalForm .input-message {
+  display: inline-block;
   color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#typeOfContentsMessage,#platformsMessage {
+  display: inline-block;
+  margin-top: -100px;
+ /*  margin-left: 20px; */
 }
 
 .platform-checkbox-container {
@@ -561,7 +570,6 @@ header .container {
 }
 
 /* TOAST */
-
 .toastDialog {
   position: relative;
   padding: 30px 50px 30px 70px;
@@ -579,4 +587,120 @@ header .container {
   border: 2px solid black;
   font-size: 16px !important;
   box-shadow: 2px 2px 0px #000000 !important;
+}
+
+.toastList {
+  position: fixed;
+  top: -10px;
+  right: 13px;
+  min-width: 350px;
+  max-width: 350px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+  z-index: 1000000000000 !important;
+}
+
+.success::after {
+  content: url('data:image/svg+xml; utf8, <svg height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path style="fill: %2321A67A" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>');
+  position: absolute;
+  top: 50%;
+  left: 17px;
+  transform: translate(0%, -50%);
+  padding: 7px 0px 0px 8px;
+  border-radius: 15px;
+}
+
+.success::before {
+  content: url('data:image/svg+xml; utf8, <svg height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path style="fill: %2321A67A" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>');
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(0%, -50%);
+  width: 4px;
+  height: 80%;
+  background-color: #21A67A;
+  border-radius: 99px;
+}
+
+.error::after {
+  content: url('data:image/svg+xml; utf8, <svg  height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  style="fill: %23ED4F2B" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z"/></svg>');
+  position: absolute;
+  top: 50%;
+  left: 17px;
+  transform: translate(0%, -50%);
+  padding: 7px 0px 0px 8px;
+  border-radius: 15px;
+}
+
+.error::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(0%, -50%);
+  width: 4px;
+  height: 80%;
+  background-color: #ED4F2B;
+  border-radius: 99px;
+}
+
+.neutral::after {
+  content: url('data:image/svg+xml; utf8, <svg height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  style="fill: %23EE9400" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/></svg>');
+  position: absolute;
+  top: 50%;
+  left: 17px;
+  transform: translate(0%, -50%);
+  padding: 7px 0px 0px 8px;
+  border-radius: 15px;
+}
+
+.neutral::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(0%, -50%);
+  width: 4px;
+  height: 80%;
+  background-color: #EE9400;
+  border-radius: 99px;
+}
+
+.toastClose {
+
+  color: #626262;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translate(0%, -50%);
+  font-weight: 900;
+  font-size: 16px;
+}
+
+@keyframes showToastDialog {
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .toastList {
+    min-width: 95% !important;
+    max-width: 95% !important;
+    position: fixed;
+    top: 49%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+}
+
+.ui-selected {
+  background-color: #FFDB58 !important;
+  font-weight: bold;
 }

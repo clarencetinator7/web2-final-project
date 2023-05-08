@@ -18,139 +18,11 @@
 
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
-
-	<style>
-		/* #deleteAll {
-			display: none;
-		}
- */
-		/* para mapalitan yung value ng naka highlight */
-		.ui-selected {
-			background-color: #FFDB58 !important;
-			font-weight: bold;
-		}
-
-		/* TOAST */
-		.toastList {
-			position: fixed;
-			top: -10px;
-			right: 13px;
-			min-width: 350px;
-			max-width: 350px;
-			height: 100vh;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-end;
-			pointer-events: none;
-			z-index: 1000000000000 !important;
-		}
-
-		/* 
-		fill: %2321A67A
-		fill yung babaguhin para maiba kulay ng SVG 
-		%23 = # 
-		%23+ HEX
-		fill: #21A67A
-		*/
-		.success::after {
-			content: url('data:image/svg+xml; utf8, <svg height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path style="fill: %2321A67A" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>');
-			position: absolute;
-			top: 50%;
-			left: 17px;
-			transform: translate(0%, -50%);
-			padding: 7px 0px 0px 8px;
-			border-radius: 15px;
-		}
-
-		.success::before {
-			content: url('data:image/svg+xml; utf8, <svg height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path style="fill: %2321A67A" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>');
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 9px;
-			transform: translate(0%, -50%);
-			width: 4px;
-			height: 80%;
-			background-color: #21A67A;
-			border-radius: 99px;
-		}
-
-		.error::after {
-			content: url('data:image/svg+xml; utf8, <svg  height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  style="fill: %23ED4F2B" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z"/></svg>');
-			position: absolute;
-			top: 50%;
-			left: 17px;
-			transform: translate(0%, -50%);
-			padding: 7px 0px 0px 8px;
-			border-radius: 15px;
-		}
-
-		.error::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 9px;
-			transform: translate(0%, -50%);
-			width: 4px;
-			height: 80%;
-			background-color: #ED4F2B;
-			border-radius: 99px;
-		}
-
-		.neutral::after {
-			content: url('data:image/svg+xml; utf8, <svg height="33" width="33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  style="fill: %23EE9400" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/></svg>');
-			position: absolute;
-			top: 50%;
-			left: 17px;
-			transform: translate(0%, -50%);
-			padding: 7px 0px 0px 8px;
-			border-radius: 15px;
-		}
-
-		.neutral::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 9px;
-			transform: translate(0%, -50%);
-			width: 4px;
-			height: 80%;
-			background-color: #EE9400;
-			border-radius: 99px;
-		}
-
-		.toastClose {
-
-			color: #626262;
-			position: absolute;
-			top: 50%;
-			right: 20px;
-			transform: translate(0%, -50%);
-			font-weight: 900;
-			font-size: 16px;
-		}
-
-		@keyframes showToastDialog {
-			to {
-				opacity: 1;
-				left: 0px;
-			}
-		}
-
-
-		@media (max-width: 400px) {
-			.toastList {
-				min-width: 95% !important;
-				max-width: 95% !important;
-				position: fixed;
-				top: 49%;
-				right: 50%;
-				transform: translate(50%, -50%);
-			}
-		}
-	</style>
-
-
+	<script src="js/lodash.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/fontawesome.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/style.js"></script>
 
 </head>
 
@@ -164,8 +36,6 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="streamingAppModalLabel">Add Content</h5>
-					<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-
 				</div>
 				<div class="modal-body">
 					<form id="modalForm" method="post" enctype="multipart/form-data">
@@ -193,7 +63,7 @@
 							<label class="form-label" class="picture">Picture: </label>
 
 							<div style="height: 300px; ">
-								<div style="width: 100%; height:100%; border:2px solid black; border-radius: 5px; position:relative" id="image_container">
+								<div style="width: 100%; height:100%; border:2px solid ; border-radius: 5px; position:relative" id="image_container">
 									<input type="file" name="picture" id="picture" accept=".png, .jpg, .jpeg" style="position:absolute; width:100%; height:100%; opacity:0;  z-index:100;" />
 									<div id="pictureText" style="position:absolute; width:100%; height:100%;z-index:50; display: flex;
 									justify-content: center;
@@ -223,7 +93,6 @@
 									<label for="web">Web</label>
 								</div>
 							</div>
-
 						</div>
 
 						<div class="checkbox">
@@ -258,7 +127,6 @@
 										<label for="indieFilms">Indie Films</label>
 									</div>
 								</div>
-
 								<div class="check-col">
 									<div>
 										<input type="checkbox" class="typeOfContent" id="koreanDramas" value="Korean Dramas">
@@ -299,23 +167,12 @@
 								<input type="text" name="otherContent" class="form-control" id="otherContent" style="opacity:0;" autocomplete="off" />
 							</div>
 						</div>
-						<!-- 
-							gamit lang to sa edit, dito malalagay yung CDATA picture ng ieedit na streaming apps
-						-->
 						<div><input type="hidden" name="editPicture" id="editPicture" autocomplete="off" readonly />
 						</div>
 
-						<!-- 
-										naka hide dito malalagay yung mga naka check na platforms at typeOfContents, converted to string at comma separated
-									 -->
 						<div><input type="hidden" name="platforms" id="platforms" autocomplete="off" required /></div>
 						<div><input type="hidden" name="typeOfContents" id="typeOfContents" autocomplete="off" required /></div>
 						<br />
-
-
-
-
-
 
 					</form>
 
@@ -327,18 +184,12 @@
 			</div>
 		</div>
 	</div>
-
-
-	<!-- <div class="btn btn-secondary" id="create">Add</div> -->
-
-
 	<header>
 		<div class="container">
 			<div class="title-wrapper">
 				<p class="h1">Streaming Apps for Legitimate Contents</p>
 			</div>
 			<div class="add-btn-wrapper">
-				<!-- add icon from font-awesome -->
 				<div id="create"> <i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add Content</div>
 			</div>
 		</div>
@@ -353,13 +204,6 @@
 	</div>
 
 	<div class="container" id="streamingAppList">
-
-
-
-
-
-
-
 	</div>
 	<div class="imageModal">
 		<img id="zoomableImage">
@@ -373,15 +217,6 @@
 
 	<br><br><br>
 
-	<script src="js/lodash.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/fontawesome.js"></script>
-	<script src="js/script.js"></script>
-	<script src="js/style.js"></script>
-
-
-
 </body>
-
 
 </html>
